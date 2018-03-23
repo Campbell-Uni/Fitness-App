@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/home" android:title="Home" android:icon="@drawable/ic_house"/>
+    <item android:id="@+id/recipies" android:title="Recipies" android:icon="@drawable/ic_cup"/>
+    <item android:id="@+id/diary" android:title="Diary" android:icon="@drawable/ic_write"/>
+    <item android:id="@+id/tools" android:title="Tools" android:icon="@drawable/ic_sliders"/>
+    <item android:id="@+id/leaderboard" android:title="Leaderboard" android:icon="@drawable/ic_stats1"/>
+    <item android:id="@+id/share" android:title="Share" android:icon="@drawable/ic_share1"/>
+    <item android:id="@+id/settings" android:title="Settings" android:icon="@drawable/ic_gear"/>
+    <item android:id="@+id/logout" android:title="Logout" android:icon="@drawable/ic_share2"/>
+</menu>
