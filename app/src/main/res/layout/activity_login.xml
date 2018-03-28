@@ -31,7 +31,7 @@
         android:text="PLACEHOLDER APPNAME"
         android:textColor="@android:color/white" />
 
-    <!--<com.facebook.login.widget.LoginButton-->
+    <!--<com.facebactivity_loginogin.widget.LoginButton-->
         <!--android:background="@color/com_facebook_blue"-->
         <!--android:id="@+id/login_btn_facebook"-->
         <!--android:layout_width="180dp"-->

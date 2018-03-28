@@ -10,11 +10,11 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        setContentView(R.layout.activity_login);
     }
 
     public void loginHome(View view) {
-        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+        startActivity(new Intent(LoginActivity.this, NavigationActivity.class));
         finish();
     }
 
