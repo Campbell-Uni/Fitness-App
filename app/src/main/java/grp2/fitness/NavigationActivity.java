@@ -14,12 +14,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import grp2.fitness.Fragments.CalculatorFragment;
 import grp2.fitness.Fragments.DiaryFragment;
+import grp2.fitness.Fragments.HeartRateFragment;
 import grp2.fitness.Fragments.HomeFragment;
 import grp2.fitness.Fragments.LeaderboardFragment;
+import grp2.fitness.Fragments.PedometerFragment;
 import grp2.fitness.Fragments.RecipeFragment;
 import grp2.fitness.Fragments.SettingsFragment;
-import grp2.fitness.Fragments.ToolFragment;
 
 public class NavigationActivity extends AppCompatActivity {
     private NavigationView navigationView;
@@ -88,14 +90,14 @@ public class NavigationActivity extends AppCompatActivity {
                 return RecipeFragment.class;
             case R.id.diary:
                 return DiaryFragment.class;
-            case R.id.tools:
-                return ToolFragment.class;
+            case R.id.pedometer:
+                return PedometerFragment.class;
+            case R.id.heartrate:
+                return HeartRateFragment.class;
+            case R.id.calculator:
+                return CalculatorFragment.class;
             case R.id.leaderboard:
                 return LeaderboardFragment.class;
-            case R.id.share:
-                Toast.makeText(NavigationActivity.this, "Could be moved to a screen specific button rather than menu item",
-                        Toast.LENGTH_LONG).show();
-                return HomeFragment.class;
             case R.id.settings:
                 return SettingsFragment.class;
             default:

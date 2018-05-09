@@ -25,11 +25,12 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/imageView6"
-        android:layout_marginTop="15dp"
-        android:text="PLACEHOLDER APPNAME"
-        android:textColor="@android:color/white" />
+        android:layout_marginTop="171dp"
+        android:text="FitLife"
+        android:textColor="@android:color/white"
+        android:textSize="24sp" />
 
     <!--<com.facebactivity_loginogin.widget.LoginButton-->
         <!--android:background="@color/com_facebook_blue"-->
@@ -49,16 +50,6 @@
         <!--android:layout_centerHorizontal="true"-->
         <!--android:layout_marginTop="257dp"-->
         <!--android:textSize="6pt" />-->
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="35dp"
-        android:text="Login Via:"
-        android:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/textView7"
@@ -110,9 +101,9 @@
         android:id="@+id/imageView2"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/textView6"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="247dp"
         app:srcCompat="@drawable/fbbtn" />
 
     <ImageView
@@ -121,23 +112,23 @@
         android:layout_height="50dp"
         android:layout_below="@+id/imageView2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
         app:srcCompat="@drawable/gbtn" />
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_alignStart="@+id/imageView3"
         android:layout_below="@+id/imageView3"
+        android:layout_centerHorizontal="true"
         app:srcCompat="@drawable/twitterbtn" />
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
+        android:layout_width="142dp"
+        android:layout_height="129dp"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="23dp"
-        app:srcCompat="@drawable/dlogo" />
+        android:layout_marginTop="36dp"
+        app:srcCompat="@drawable/logow" />
 
 </RelativeLayout>
