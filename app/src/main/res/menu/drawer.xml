@@ -1,35 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/home"
-        android:icon="@drawable/ic_house"
-        android:title="Home"/>
-    <item
-        android:id="@+id/recipies"
-        android:icon="@drawable/ic_cup"
-        android:title="Recipies" />
-    <item
-        android:id="@+id/diary"
-        android:icon="@drawable/ic_write"
-        android:title="Diary" />
-    <item
-        android:id="@+id/tools"
-        android:icon="@drawable/ic_sliders"
-        android:title="Tools" />
-    <item
-        android:id="@+id/leaderboard"
-        android:icon="@drawable/ic_stats1"
-        android:title="Leaderboard" />
-    <item
-        android:id="@+id/share"
-        android:icon="@drawable/ic_share1"
-        android:title="Share" />
-    <item
-        android:id="@+id/settings"
-        android:icon="@drawable/ic_gear"
-        android:title="Settings" />
-    <item
-        android:id="@+id/logout"
-        android:icon="@drawable/ic_share2"
-        android:title="Logout" />
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home"
+            android:icon="@drawable/ic_house"
+            android:title="Home"/>
+        <item
+            android:id="@+id/recipies"
+            android:icon="@drawable/ic_cup"
+            android:title="Recipies" />
+        <item
+            android:id="@+id/diary"
+            android:icon="@drawable/ic_write"
+            android:title="Diary" />
+        <item
+            android:id="@+id/tools"
+            android:icon="@drawable/ic_sliders"
+            android:title="Tools" />
+        <item
+            android:id="@+id/leaderboard"
+            android:icon="@drawable/ic_stats1"
+            android:title="Leaderboard" />
+        <item
+            android:id="@+id/share"
+            android:icon="@drawable/ic_share1"
+            android:title="Share" />
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/ic_gear"
+            android:title="Settings" />
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/ic_share2"
+            android:title="Logout" />
+    </group>
 </menu>
