@@ -135,4 +135,14 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         updateView(fragmentClass);
         return true;
     }
+
+    //Pass listener to relevant fragment
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_frame);
+        if (fragment != null) {
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }
+    }
 }
