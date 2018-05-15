@@ -2,4 +2,24 @@
     <string name="app_name">fitness</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+
+
+    <!--Preferences-->
+    <string name="pref_unit_energy_label">Energy</string>
+    <string name="pref_unit_distance_label">Distance</string>
+    <string name="pref_unit_weight_label">Weight</string>
+    <string name="pref_unit_energy_key">pref_unit_energy</string>
+    <string name="pref_unit_distance_key">pref_unit_distance</string>
+    <string name="pref_unit_weight_key">pref_unit_weight</string>
+
+    <string-array name="pref_generic_units">
+        <item>Metric</item>
+        <item>Imperial</item>
+    </string-array>
+
+    <string-array name="pref_energy_units">
+        <item>Kilojoules</item>
+        <item>Calories</item>
+    </string-array>
+
 </resources>

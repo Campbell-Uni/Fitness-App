@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:key="pref_category_units"
+        android:title="Units">
+        <ListPreference
+            android:defaultValue="Calories"
+            android:dialogTitle="Energy"
+            android:summary="%s"
+            android:entries="@array/pref_energy_units"
+            android:entryValues="@array/pref_energy_units"
+            android:key="@string/pref_unit_energy_key"
+            android:title="@string/pref_unit_energy_label" />
+
+        <ListPreference
+            android:defaultValue="Metric"
+            android:dialogTitle="Distance"
+            android:summary="%s"
+            android:entries="@array/pref_generic_units"
+            android:entryValues="@array/pref_generic_units"
+            android:key="@string/pref_unit_distance_key"
+            android:title="@string/pref_unit_distance_label" />
+
+        <ListPreference
+            android:defaultValue="Metric"
+            android:dialogTitle="Weight"
+            android:summary="%s"
+            android:entries="@array/pref_generic_units"
+            android:entryValues="@array/pref_generic_units"
+            android:key="@string/pref_unit_weight_key"
+            android:title="@string/pref_unit_weight_label" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
