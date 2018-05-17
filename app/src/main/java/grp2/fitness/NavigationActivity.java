@@ -26,11 +26,13 @@ import grp2.fitness.Fragments.LeaderboardFragment;
 import grp2.fitness.Fragments.PedometerFragment;
 import grp2.fitness.Fragments.RecipeFragment;
 import grp2.fitness.Fragments.SettingsFragment;
+import grp2.fitness.Handlers.GoogleFitApi;
 
 public class NavigationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
+    private GoogleFitApi googleFitApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,13 +138,23 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         return true;
     }
 
-    //Pass listener to relevant fragment
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_frame);
-        if (fragment != null) {
-            fragment.onActivityResult(requestCode, resultCode, data);
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if( requestCode == GoogleFitApi.REQUEST_KEY) {
+            googleFitApi.setAuthState(false);
+            if( resultCode == RESULT_OK ) {
+                    googleFitApi.getClient().connect();
+            }
         }
+    }
+
+    public GoogleFitApi getGoogleFitApi(GoogleFitApi.GoogleFitApiCallback callback){
+        if(googleFitApi == null){
+            googleFitApi = new GoogleFitApi(this, callback);
+        }else {
+            googleFitApi.setCallback(callback);
+        }
+
+        return googleFitApi;
     }
 }
