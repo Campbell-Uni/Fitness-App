@@ -42,7 +42,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         Toolbar toolbar = findViewById(R.id.navigation_toolbar);
         NavigationView navigationView = findViewById(R.id.navigation_view);
 
-        drawerLayout    = findViewById(R.id.drawer_layout);
+        drawerLayout = findViewById(R.id.drawer_layout);
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
 
         setSupportActionBar(toolbar);
@@ -123,7 +123,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
                 fragmentClass = SettingsFragment.class;
                 break;
             case R.id.logout:
-//                IdentityManager.getDefaultIdentityManager().signOut();
+                IdentityManager.getDefaultIdentityManager().signOut();
                 startActivity(new Intent(NavigationActivity.this, LoginActivity.class));
                 finish();
                 return true;
