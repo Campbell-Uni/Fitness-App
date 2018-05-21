@@ -43,7 +43,8 @@ public class UnitConverter {
         return weightInKg / Math.pow(heightInMetres, 2);
     }
 
+    //Mifflin-St. Jeor Equation
     public static double getRequiredKj(Gender gender, PhysicalActivity physicalActivity, double weightInKg, double heightInMetres, double ageInYears){
-        return (10 * weightInKg + 6.25 * heightInMetres - 5 * ageInYears + gender.getValue()) * physicalActivity.getValue();
+        return getKjFromCal((10 * weightInKg + 6.25 * heightInMetres - 5 * ageInYears + gender.getValue()) * physicalActivity.getValue());
     }
 }

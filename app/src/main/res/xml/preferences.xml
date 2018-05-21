@@ -2,8 +2,8 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        android:key="pref_category_units"
-        android:title="Units">
+        android:key="@string/pref_category_unit_key"
+        android:title="@string/pref_category_unit_label">
         <ListPreference
             android:defaultValue="Calories"
             android:dialogTitle="Energy"
@@ -30,6 +30,21 @@
             android:entryValues="@array/pref_generic_units"
             android:key="@string/pref_unit_weight_key"
             android:title="@string/pref_unit_weight_label" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="@string/pref_category_personal_key"
+        android:title="@string/pref_category_personal_label">
+
+        <ListPreference
+            android:defaultValue="Moderate"
+            android:dialogTitle="Lifestyle"
+            android:summary="%s"
+            android:entries="@array/pref_lifestyle"
+            android:entryValues="@array/pref_lifestyle"
+            android:key="@string/pref_unit_lifestyle_key"
+            android:title="@string/pref_personal_lifestyle_label" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

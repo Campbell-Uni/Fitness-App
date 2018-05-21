@@ -16,7 +16,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobile.auth.core.IdentityManager;
+import com.amazonaws.mobileconnectors.cognito.CognitoSyncManager;
+import com.amazonaws.regions.Regions;
 
 import grp2.fitness.Fragments.CalculatorFragment;
 import grp2.fitness.Fragments.DiaryFragment;
@@ -34,6 +37,8 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
     private ActionBarDrawerToggle drawerToggle;
     private GoogleFitApi googleFitApi;
 
+    private CognitoSyncManager syncClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +55,21 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
 
         navigationView.setNavigationItemSelectedListener(this);
         updateView(HomeFragment.class);
+
+        initialiseCognito();
+    }
+
+    private void initialiseCognito() {
+        CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
+                getApplicationContext(),
+                "ap-southeast-2:9e086252-ebfb-4c0d-8d66-bdd54c04d6c1", // Identity pool ID
+                Regions.AP_SOUTHEAST_2 // Region
+        );
+
+        syncClient = new CognitoSyncManager(
+                getApplicationContext(),
+                Regions.AP_SOUTHEAST_2, // Region
+                credentialsProvider);
     }
 
     public void updateView(Class fragmentClass) {
@@ -156,5 +176,9 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         }
 
         return googleFitApi;
+    }
+
+    public CognitoSyncManager getSyncClient(){
+        return this.syncClient;
     }
 }

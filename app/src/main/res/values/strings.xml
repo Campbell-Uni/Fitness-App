@@ -5,12 +5,21 @@
 
 
     <!--Preferences-->
+    <string name="pref_category_unit_key">pref_category_units</string>
+    <string name="pref_category_personal_key">pref_category_personal</string>
+
+    <string name="pref_category_unit_label">Units</string>
+    <string name="pref_category_personal_label">Personal</string>
+
     <string name="pref_unit_energy_label">Energy</string>
     <string name="pref_unit_distance_label">Distance</string>
     <string name="pref_unit_weight_label">Weight</string>
+    <string name="pref_personal_lifestyle_label">Lifestyle</string>
+
     <string name="pref_unit_energy_key">pref_unit_energy</string>
     <string name="pref_unit_distance_key">pref_unit_distance</string>
     <string name="pref_unit_weight_key">pref_unit_weight</string>
+    <string name="pref_unit_lifestyle_key">pref_unit_lifestyle</string>
 
     <string-array name="pref_generic_units">
         <item>Metric</item>
@@ -20,6 +29,12 @@
     <string-array name="pref_energy_units">
         <item>Kilojoules</item>
         <item>Calories</item>
+    </string-array>
+
+    <string-array name="pref_lifestyle">
+        <item>Sedentary</item>
+        <item>Moderate</item>
+        <item>Active</item>
     </string-array>
 
 </resources>
