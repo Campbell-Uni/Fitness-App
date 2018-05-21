@@ -2,6 +2,7 @@ package grp2.fitness;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.icu.util.Calendar;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -18,8 +19,15 @@ import android.widget.Toast;
 
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobile.auth.core.IdentityManager;
+import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobileconnectors.cognito.CognitoSyncManager;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
+import com.amazonaws.models.nosql.DailyDataDO;
 import com.amazonaws.regions.Regions;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import grp2.fitness.Fragments.CalculatorFragment;
 import grp2.fitness.Fragments.DiaryFragment;
@@ -37,7 +45,9 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
     private ActionBarDrawerToggle drawerToggle;
     private GoogleFitApi googleFitApi;
 
+    private CognitoCachingCredentialsProvider credentialsProvider;
     private CognitoSyncManager syncClient;
+    private DynamoDBMapper dynamoDBMapper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +70,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
     }
 
     private void initialiseCognito() {
-        CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
+        credentialsProvider = new CognitoCachingCredentialsProvider(
                 getApplicationContext(),
                 "ap-southeast-2:9e086252-ebfb-4c0d-8d66-bdd54c04d6c1", // Identity pool ID
                 Regions.AP_SOUTHEAST_2 // Region
@@ -70,6 +80,14 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
                 getApplicationContext(),
                 Regions.AP_SOUTHEAST_2, // Region
                 credentialsProvider);
+
+        AmazonDynamoDBClient dynamoDBClient = new AmazonDynamoDBClient(AWSMobileClient.getInstance().getCredentialsProvider());
+        this.dynamoDBMapper = DynamoDBMapper.builder()
+                .dynamoDBClient(dynamoDBClient)
+                .awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
+                .build();
+
+
     }
 
     public void updateView(Class fragmentClass) {
@@ -180,5 +198,24 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
 
     public CognitoSyncManager getSyncClient(){
         return this.syncClient;
+    }
+
+    public void createDailyData() {
+        final DailyDataDO dailyData = new DailyDataDO();
+
+        dailyData.setUserId(credentialsProvider.getIdentityId());
+
+        Date today = Calendar.getInstance().getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+        String formattedDate = dateFormat.format(today);
+
+        dailyData.setDate(formattedDate);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                dynamoDBMapper.save(dailyData);
+            }
+        }).start();
     }
 }
