@@ -1,6 +1,7 @@
 package grp2.fitness;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.icu.util.Calendar;
 import android.support.annotation.NonNull;
@@ -67,6 +68,16 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         updateView(HomeFragment.class);
 
         initialiseCognito();
+
+        testFirstLogin();
+    }
+
+    private void testFirstLogin() {
+        SharedPreferences sharedPreferences = getSharedPreferences("com.grp2.fitness", MODE_PRIVATE);
+        if (sharedPreferences.getBoolean("firststart", true)) {
+            sharedPreferences.edit().putBoolean("firststart", false).apply();
+            startActivity(new Intent(NavigationActivity.this , SetupActivity.class));
+        }
     }
 
     private void initialiseCognito() {
