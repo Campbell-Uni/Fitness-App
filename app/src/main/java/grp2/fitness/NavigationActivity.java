@@ -3,7 +3,7 @@ package grp2.fitness;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.icu.util.Calendar;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -12,23 +12,13 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobile.auth.core.IdentityManager;
-import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobileconnectors.cognito.CognitoSyncManager;
-import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
-import com.amazonaws.models.nosql.DailyDataDO;
 import com.amazonaws.regions.Regions;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import grp2.fitness.Fragments.CalculatorFragment;
 import grp2.fitness.Fragments.DiaryFragment;
@@ -38,17 +28,25 @@ import grp2.fitness.Fragments.LeaderboardFragment;
 import grp2.fitness.Fragments.PedometerFragment;
 import grp2.fitness.Fragments.RecipeFragment;
 import grp2.fitness.Fragments.SettingsFragment;
+import grp2.fitness.Handlers.CognitoDatasetManager;
+import grp2.fitness.Handlers.DailyDataManager;
 import grp2.fitness.Handlers.GoogleFitApi;
 
-public class NavigationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class NavigationActivity extends AppCompatActivity implements
+        NavigationView.OnNavigationItemSelectedListener,
+        SharedPreferences.OnSharedPreferenceChangeListener{
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
+
     private GoogleFitApi googleFitApi;
 
     private CognitoCachingCredentialsProvider credentialsProvider;
     private CognitoSyncManager syncClient;
-    private DynamoDBMapper dynamoDBMapper;
+    private DailyDataManager dailyDataManager;
+    private CognitoDatasetManager datasetManager;
+
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,12 +66,23 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         updateView(HomeFragment.class);
 
         initialiseCognito();
-
         testFirstLogin();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+    }
+
     private void testFirstLogin() {
-        SharedPreferences sharedPreferences = getSharedPreferences("com.grp2.fitness", MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("com.grp2.fitness", MODE_PRIVATE);
         if (sharedPreferences.getBoolean("firststart", true)) {
             sharedPreferences.edit().putBoolean("firststart", false).apply();
             startActivity(new Intent(NavigationActivity.this , SetupActivity.class));
@@ -92,13 +101,8 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
                 Regions.AP_SOUTHEAST_2, // Region
                 credentialsProvider);
 
-        AmazonDynamoDBClient dynamoDBClient = new AmazonDynamoDBClient(AWSMobileClient.getInstance().getCredentialsProvider());
-        this.dynamoDBMapper = DynamoDBMapper.builder()
-                .dynamoDBClient(dynamoDBClient)
-                .awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
-                .build();
-
-
+        dailyDataManager = new DailyDataManager(credentialsProvider.getIdentityId());
+        datasetManager = new CognitoDatasetManager(syncClient);
     }
 
     public void updateView(Class fragmentClass) {
@@ -197,6 +201,11 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         }
     }
 
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String preferenceKey) {
+        datasetManager.setValue(preferenceKey, sharedPreferences.getString(preferenceKey, ""));
+    }
+
     public GoogleFitApi getGoogleFitApi(GoogleFitApi.GoogleFitApiCallback callback){
         if(googleFitApi == null){
             googleFitApi = new GoogleFitApi(this, callback);
@@ -210,23 +219,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
     public CognitoSyncManager getSyncClient(){
         return this.syncClient;
     }
-
-    public void createDailyData() {
-        final DailyDataDO dailyData = new DailyDataDO();
-
-        dailyData.setUserId(credentialsProvider.getIdentityId());
-
-        Date today = Calendar.getInstance().getTime();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
-        String formattedDate = dateFormat.format(today);
-
-        dailyData.setDate(formattedDate);
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                dynamoDBMapper.save(dailyData);
-            }
-        }).start();
+    public DailyDataManager getDailyDataManager(){
+        return this.dailyDataManager;
     }
 }

@@ -10,16 +10,17 @@ import java.util.List;
 
 public class CognitoDatasetManager extends DefaultSyncCallback {
 
+    public static final String DATASET = "PERSONAL_DATA";
+
     private Dataset dataset;
     private boolean isSynced;
 
-
-    CognitoDatasetManager(CognitoSyncManager syncManager, String datasetName){
-        dataset = syncManager.openOrCreateDataset(datasetName);
+    public CognitoDatasetManager(CognitoSyncManager syncManager){
+        dataset = syncManager.openOrCreateDataset(DATASET);
         dataset.synchronize(this);
     }
 
-    public void putValue(String key, String value){
+    public void setValue(String key, String value){
         dataset.put(key, value);
         isSynced = false;
         dataset.synchronize(this);
