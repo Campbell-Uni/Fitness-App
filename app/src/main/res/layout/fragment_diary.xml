@@ -6,10 +6,20 @@
     tools:context="grp2.fitness.Fragments.HomeFragment">
 
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Energy"/>
+
     <EditText
         android:id="@+id/energy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Description"/>
 
     <EditText
         android:id="@+id/description"
@@ -22,5 +32,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Submit" />
+    
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/list"/>
 
 </LinearLayout>

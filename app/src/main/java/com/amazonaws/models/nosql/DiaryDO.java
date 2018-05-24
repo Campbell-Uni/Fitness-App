@@ -54,4 +54,8 @@ public class DiaryDO {
         this._energy = _energy;
     }
 
+    @Override
+    public String toString() {
+        return _description + " [" + _energy + " kJ]";
+    }
 }

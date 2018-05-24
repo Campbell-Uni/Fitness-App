@@ -2,13 +2,16 @@ package grp2.fitness.Fragments;
 
 import android.icu.util.Calendar;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.amazonaws.mobile.client.AWSMobileClient;
@@ -30,123 +33,74 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
+import grp2.fitness.Handlers.DiaryManager;
 import grp2.fitness.NavigationActivity;
 import grp2.fitness.R;
 import grp2.fitness.SetupGoals;
 
-public class DiaryFragment extends Fragment{
+public class DiaryFragment extends Fragment implements DiaryManager.DiaryManagerListener{
 
     private int calGoal;
     private int calCurrent;
     private int calRemaining;
     private int calCut;
 
-    private String userId;
-    private String todayDate;
-    private DynamoDBMapper dynamoDBMapper;
-    private ArrayList<DiaryDO> diary;
+    private NavigationActivity activity;
 
     private EditText energy;
     private EditText description;
-    private Button submit;
+
+    private ArrayAdapter<DiaryDO> diaryAdapter;
+    private DiaryManager diaryManager;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        if(getActivity() == null){
+        if(getActivity() == null || getContext() == null){
             return null;
         }
 
-        userId = ((NavigationActivity)getActivity()).getCredentialsProvider().getIdentityId();
-        Date today = Calendar.getInstance().getTime();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        todayDate = dateFormat.format(today);
-
-        AmazonDynamoDBClient dynamoDBClient = new AmazonDynamoDBClient(AWSMobileClient.getInstance().getCredentialsProvider());
-        dynamoDBMapper = DynamoDBMapper.builder()
-                .dynamoDBClient(dynamoDBClient)
-                .awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
-                .build();
-
         View view = inflater.inflate(R.layout.fragment_diary, container, false);
-        energy = view.findViewById(R.id.energy);
-        description = view.findViewById(R.id.description);
-        submit = view.findViewById(R.id.submit);
+        activity = (NavigationActivity) getActivity();
+
+        energy          = view.findViewById(R.id.energy);
+        description     = view.findViewById(R.id.description);
+        Button submit   = view.findViewById(R.id.submit);
+        ListView list   = view.findViewById(R.id.list);
+
+        ArrayList<DiaryDO> diary = new ArrayList<>();
+        diaryManager = new DiaryManager(activity.getCredentialsProvider().getIdentityId(), this);
+
+        diaryAdapter = new ArrayAdapter<>(
+                getContext(),
+                android.R.layout.simple_list_item_1,
+                diary
+        );
+
+        list.setAdapter(diaryAdapter);
+        diaryManager.syncDiary();
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addDiaryEntry(Double.parseDouble(energy.getText().toString()), description.getText().toString());
+                diaryManager.addDiaryEntry(Double.parseDouble(energy.getText().toString()), description.getText().toString());
             }
         });
-
-        diary = new ArrayList<>();
-        syncDiary();
 
         return view;
     }
 
-    public void addDiaryEntry(Double energy, String description){
-        final DiaryDO diaryEntry = new DiaryDO();
-
-        diaryEntry.setUserId(userId);
-        diaryEntry.setEntryId(todayDate + diary.size());
-        diaryEntry.setEnergy(energy);
-        diaryEntry.setDescription(description);
-
-        new Thread(new Runnable() {
+    @Override
+    public void onDiarySynced(final ArrayList<DiaryDO> diary) {
+        activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                dynamoDBMapper.save(diaryEntry);
+                diaryAdapter.clear();
+                diaryAdapter.addAll(diary);
+                diaryAdapter.notifyDataSetChanged();
             }
-        }).start();
-
-        syncDiary();
-    }
-
-    private void syncDiary(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                DiaryDO entry = new DiaryDO();
-                entry.setUserId(userId);
-
-                Condition rangeKeyCondition = new Condition()
-                        .withComparisonOperator(ComparisonOperator.BEGINS_WITH)
-                        .withAttributeValueList(new AttributeValue().withS(todayDate));
-
-                DynamoDBQueryExpression queryExpression = new DynamoDBQueryExpression()
-                        .withHashKeyValues(entry)
-                        .withRangeKeyCondition("entryId", rangeKeyCondition)
-                        .withConsistentRead(false);
-
-                PaginatedList<DiaryDO> result = dynamoDBMapper.query(DiaryDO.class, queryExpression);
-
-                Gson gson = new Gson();
-                JSONObject reader;
-                diary.clear();
-
-                // Loop through query results
-                for (int i = 0; i < result.size(); i++) {
-                    String jsonFormOfItem = gson.toJson(result.get(i));
-
-                    try {
-                        reader = new JSONObject(jsonFormOfItem);
-
-                        DiaryDO diaryEntry = new DiaryDO();
-
-                        diaryEntry.setUserId(reader.getString("_energy"));
-                        diaryEntry.setEntryId(reader.getString("_energy"));
-                        diaryEntry.setEnergy(Double.parseDouble(reader.getString("_energy")));
-                        diaryEntry.setDescription(reader.getString("_energy"));
-
-                        diary.add(diaryEntry);
-                    }catch (Exception e) {
-                        //TODO
-                    }
-                }
-            }
-        }).start();
+        });
     }
 
     public int getCalGoal() {
@@ -176,5 +130,4 @@ public class DiaryFragment extends Fragment{
     public int getCalCut() { return calCut; }
 
     public void setCalCut(int calCut) { this.calCut = calCut; }
-
 }
