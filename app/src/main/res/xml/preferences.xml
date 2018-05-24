@@ -42,8 +42,38 @@
             android:summary="%s"
             android:entries="@array/pref_lifestyle"
             android:entryValues="@array/pref_lifestyle"
-            android:key="@string/pref_unit_lifestyle_key"
+            android:key="@string/pref_personal_lifestyle_key"
             android:title="@string/pref_personal_lifestyle_label" />
+
+        <ListPreference
+            android:defaultValue="Male"
+            android:dialogTitle="Gender"
+            android:summary="%s"
+            android:entries="@array/pref_lifestyle"
+            android:entryValues="@array/pref_lifestyle"
+            android:key="@string/pref_personal_lifestyle_key"
+            android:title="@string/pref_personal_lifestyle_label" />
+
+        <EditTextPreference
+            android:defaultValue="85"
+            android:dialogTitle="Weight"
+            android:title="@string/pref_personal_weight_label"
+            android:key="@string/pref_personal_weight_key"
+            />
+
+        <EditTextPreference
+            android:defaultValue="85"
+            android:dialogTitle="Height"
+            android:title="@string/pref_personal_height_label"
+            android:key="@string/pref_personal_height_key"
+            />
+
+        <EditTextPreference
+            android:defaultValue="85"
+            android:dialogTitle="Energy Goal"
+            android:title="@string/pref_personal_energy_label"
+            android:key="@string/pref_personal_energy_key"
+            />
 
     </PreferenceCategory>
 

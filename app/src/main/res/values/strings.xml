@@ -15,11 +15,20 @@
     <string name="pref_unit_distance_label">Distance</string>
     <string name="pref_unit_weight_label">Weight</string>
     <string name="pref_personal_lifestyle_label">Lifestyle</string>
+    <string name="pref_personal_gender_label">Gender</string>
+    <string name="pref_personal_weight_label">Weight</string>
+    <string name="pref_personal_height_label">Height</string>
+    <string name="pref_personal_energy_label">Energy Goal</string>
 
     <string name="pref_unit_energy_key">pref_unit_energy</string>
     <string name="pref_unit_distance_key">pref_unit_distance</string>
     <string name="pref_unit_weight_key">pref_unit_weight</string>
-    <string name="pref_unit_lifestyle_key">pref_unit_lifestyle</string>
+    <string name="pref_personal_lifestyle_key">pref_unit_lifestyle</string>
+    <string name="pref_personal_gender_key">pref_unit_gender</string>
+    <string name="pref_personal_weight_key">pref_unit_weight</string>
+    <string name="pref_personal_height_key">pref_unit_height</string>
+    <string name="pref_personal_energy_key">pref_unit_energy</string>
+
 
     <string-array name="pref_generic_units">
         <item>Metric</item>
@@ -35,6 +44,11 @@
         <item>Sedentary</item>
         <item>Moderate</item>
         <item>Active</item>
+    </string-array>
+
+    <string-array name="pref_gender">
+        <item>Male</item>
+        <item>Female</item>
     </string-array>
 
 </resources>
