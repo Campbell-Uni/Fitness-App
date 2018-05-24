@@ -142,6 +142,8 @@ public class NavigationActivity extends AppCompatActivity implements
 
     @Override
     public void onBackPressed() {
+        updateView(HomeFragment.class);
+
         if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             this.drawerLayout.closeDrawer(GravityCompat.START);
         } else {
