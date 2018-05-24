@@ -29,7 +29,6 @@ import grp2.fitness.Fragments.HeartRateFragment;
 import grp2.fitness.Fragments.HomeFragment;
 import grp2.fitness.Fragments.LeaderboardFragment;
 import grp2.fitness.Fragments.PedometerFragment;
-import grp2.fitness.Fragments.RecipeFragment;
 import grp2.fitness.Fragments.SettingsFragment;
 import grp2.fitness.Handlers.CognitoDatasetManager;
 import grp2.fitness.Handlers.DailyDataManager;
@@ -157,9 +156,6 @@ public class NavigationActivity extends AppCompatActivity implements
         switch (item.getItemId()) {
             case R.id.home:
                 fragmentClass = HomeFragment.class;
-                break;
-            case R.id.recipies:
-                fragmentClass = RecipeFragment.class;
                 break;
             case R.id.diary:
                 fragmentClass = DiaryFragment.class;

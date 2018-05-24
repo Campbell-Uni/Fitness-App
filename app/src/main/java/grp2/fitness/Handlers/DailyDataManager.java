@@ -47,12 +47,12 @@ public class DailyDataManager {
         dailyData.setUserId(userId);
         dailyData.setDate(todayDate);
 
+        saveDailyData();
+
         dynamoDBMapper = DynamoDBMapper.builder()
                 .dynamoDBClient(new AmazonDynamoDBClient(AWSMobileClient.getInstance().getCredentialsProvider()))
                 .awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
                 .build();
-
-        syncDailyData();
     }
 
     private void syncDailyData(){
@@ -113,8 +113,10 @@ public class DailyDataManager {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                dynamoDBMapper.save(dailyData);
-                callback.onDailyDataSaved(dailyData);
+                if(dynamoDBMapper != null){
+                    dynamoDBMapper.save(dailyData);
+                    callback.onDailyDataSaved(dailyData);
+                }
             }
         }).start();
     }
