@@ -18,7 +18,10 @@ import android.view.MenuItem;
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobile.auth.core.IdentityManager;
 import com.amazonaws.mobileconnectors.cognito.CognitoSyncManager;
+import com.amazonaws.models.nosql.DailyDataDO;
 import com.amazonaws.regions.Regions;
+
+import java.util.ArrayList;
 
 import grp2.fitness.Fragments.CalculatorFragment;
 import grp2.fitness.Fragments.DiaryFragment;
@@ -34,7 +37,8 @@ import grp2.fitness.Handlers.GoogleFitApi;
 
 public class NavigationActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
-        SharedPreferences.OnSharedPreferenceChangeListener{
+        SharedPreferences.OnSharedPreferenceChangeListener,
+        DailyDataManager.DailyDataListener{
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
@@ -101,7 +105,7 @@ public class NavigationActivity extends AppCompatActivity implements
                 Regions.AP_SOUTHEAST_2, // Region
                 credentialsProvider);
 
-        dailyDataManager = new DailyDataManager(credentialsProvider.getIdentityId());
+        dailyDataManager = new DailyDataManager(credentialsProvider.getIdentityId(), this);
         datasetManager = new CognitoDatasetManager(syncClient);
     }
 
@@ -206,6 +210,16 @@ public class NavigationActivity extends AppCompatActivity implements
         datasetManager.setValue(preferenceKey, sharedPreferences.getString(preferenceKey, ""));
     }
 
+    @Override
+    public void onAllDailyDataSynced(ArrayList<DailyDataDO> allDailyData) {
+
+    }
+
+    @Override
+    public void onDailyDataSaved(DailyDataDO dailyData) {
+
+    }
+
     public GoogleFitApi getGoogleFitApi(GoogleFitApi.GoogleFitApiCallback callback){
         if(googleFitApi == null){
             googleFitApi = new GoogleFitApi(this, callback);
@@ -216,13 +230,15 @@ public class NavigationActivity extends AppCompatActivity implements
         return googleFitApi;
     }
 
-    public CognitoSyncManager getSyncClient(){
-        return this.syncClient;
-    }
     public DailyDataManager getDailyDataManager(){
         return this.dailyDataManager;
+    }
+
+    public CognitoSyncManager getSyncClient(){
+        return this.syncClient;
     }
     public CognitoCachingCredentialsProvider getCredentialsProvider(){
         return this.credentialsProvider;
     }
+
 }

@@ -63,4 +63,8 @@ public class DailyDataDO {
         this._steps = _steps;
     }
 
+    @Override
+    public String toString() {
+        return "Steps: " + _steps + " Energy: " + _energy + " Heart Rate: " + _averageHeartRate;
+    }
 }
