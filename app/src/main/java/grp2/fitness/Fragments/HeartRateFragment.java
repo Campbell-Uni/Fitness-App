@@ -17,6 +17,7 @@ import com.google.android.gms.fitness.data.Field;
 import com.google.android.gms.fitness.data.Value;
 import com.google.android.gms.fitness.request.OnDataPointListener;
 
+import grp2.fitness.Handlers.DailyDataManager;
 import grp2.fitness.Handlers.GoogleFitApi;
 import grp2.fitness.NavigationActivity;
 import grp2.fitness.R;
@@ -62,6 +63,11 @@ public class HeartRateFragment extends Fragment implements
     public void onStop() {
         super.onStop();
         googleFitApi.disconnect();
+
+        String heartRateString = heartRate.getText().toString();
+        if(!heartRateString.equals("") && ((NavigationActivity)getActivity()) != null){
+            ((NavigationActivity)getActivity()).getDailyDataManager().setColumn(DailyDataManager.DailyDataColumn.HEART_RATE, heartRateString);
+        }
     }
 
     @Override

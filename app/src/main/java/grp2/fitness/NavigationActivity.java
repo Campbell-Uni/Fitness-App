@@ -222,4 +222,7 @@ public class NavigationActivity extends AppCompatActivity implements
     public DailyDataManager getDailyDataManager(){
         return this.dailyDataManager;
     }
+    public CognitoCachingCredentialsProvider getCredentialsProvider(){
+        return this.credentialsProvider;
+    }
 }

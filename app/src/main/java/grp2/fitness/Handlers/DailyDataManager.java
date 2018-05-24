@@ -4,10 +4,17 @@ import android.icu.util.Calendar;
 
 import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBQueryExpression;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedList;
 import com.amazonaws.models.nosql.DailyDataDO;
+import com.amazonaws.models.nosql.DiaryDO;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
+import com.google.gson.Gson;
+
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class DailyDataManager {
@@ -16,6 +23,7 @@ public class DailyDataManager {
 
     private DynamoDBMapper dynamoDBMapper;
     private DailyDataDO dailyData;
+    private ArrayList<DailyDataDO> allDailyData;
 
     private String userId;
     private String todayDate;
@@ -42,8 +50,8 @@ public class DailyDataManager {
             public void run() {
                 dailyData = dynamoDBMapper.load(
                         DailyDataDO.class,
-                        userId,
-                        todayDate);
+                        todayDate,
+                        userId);
 
                 if(dailyData == null){
                     createDailyData();
@@ -110,5 +118,49 @@ public class DailyDataManager {
                 dynamoDBMapper.save(dailyData);
             }
         }).start();
+    }
+
+    private void syncAllDailyData(final String date) {
+        allDailyData = new ArrayList<>();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                DynamoDBQueryExpression<DailyDataDO> query = new DynamoDBQueryExpression<DailyDataDO>();
+                DailyDataDO hashObject = new DailyDataDO();
+                hashObject.setDate(date);
+                query.setHashKeyValues(hashObject);
+
+                PaginatedList<DailyDataDO> result = dynamoDBMapper.query(DailyDataDO.class, query);
+
+                Gson gson = new Gson();
+                JSONObject reader;
+
+                // Loop through query results
+                for (int i = 0; i < result.size(); i++) {
+                    String jsonFormOfItem = gson.toJson(result.get(i));
+
+                    try {
+                        reader = new JSONObject(jsonFormOfItem);
+
+                        DailyDataDO dailyData = new DailyDataDO();
+
+                        dailyData.setDate(reader.getString("_date"));
+                        dailyData.setUserId(reader.getString("_userId"));
+                        dailyData.setEnergy(Double.parseDouble(reader.getString("_energy")));
+                        dailyData.setAverageHeartRate(Double.parseDouble(reader.getString("_averageHeartRate")));
+                        dailyData.setSteps(Double.parseDouble(reader.getString("_steps")));
+
+                        allDailyData.add(dailyData);
+                    } catch (Exception e) {
+                        //TODO
+                    }
+                }
+            }
+        }).start();
+    }
+
+    public ArrayList<DailyDataDO> getAllDailyData() {
+        return allDailyData;
     }
 }

@@ -14,6 +14,7 @@ import com.google.android.gms.fitness.data.Field;
 import com.google.android.gms.fitness.data.Value;
 import com.google.android.gms.fitness.request.OnDataPointListener;
 
+import grp2.fitness.Handlers.DailyDataManager;
 import grp2.fitness.Handlers.GoogleFitApi;
 import grp2.fitness.NavigationActivity;
 import grp2.fitness.R;
@@ -59,6 +60,11 @@ public class PedometerFragment extends Fragment implements
     public void onStop() {
         super.onStop();
         googleFitApi.disconnect();
+
+        String stepString = steps.getText().toString();
+        if(!stepString.equals("") && ((NavigationActivity)getActivity()) != null){
+            ((NavigationActivity)getActivity()).getDailyDataManager().setColumn(DailyDataManager.DailyDataColumn.STEPS, stepString);
+        }
     }
 
     @Override

@@ -11,25 +11,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@DynamoDBTable(tableName = "fitnessapp-mobilehub-969335156-daily_data")
+@DynamoDBTable(tableName = "fitnessapp-mobilehub-969335156-diary")
 
-public class DailyDataDO {
-    private String _date;
+public class DiaryDO {
     private String _userId;
-    private Double _averageHeartRate;
+    private String _entryId;
+    private String _description;
     private Double _energy;
-    private Double _steps;
 
-    @DynamoDBHashKey(attributeName = "date")
-    @DynamoDBAttribute(attributeName = "date")
-    public String getDate() {
-        return _date;
-    }
-
-    public void setDate(final String _date) {
-        this._date = _date;
-    }
-    @DynamoDBRangeKey(attributeName = "userId")
+    @DynamoDBHashKey(attributeName = "userId")
     @DynamoDBAttribute(attributeName = "userId")
     public String getUserId() {
         return _userId;
@@ -38,13 +28,22 @@ public class DailyDataDO {
     public void setUserId(final String _userId) {
         this._userId = _userId;
     }
-    @DynamoDBAttribute(attributeName = "average_heart_rate")
-    public Double getAverageHeartRate() {
-        return _averageHeartRate;
+    @DynamoDBRangeKey(attributeName = "entryId")
+    @DynamoDBAttribute(attributeName = "entryId")
+    public String getEntryId() {
+        return _entryId;
     }
 
-    public void setAverageHeartRate(final Double _averageHeartRate) {
-        this._averageHeartRate = _averageHeartRate;
+    public void setEntryId(final String _entryId) {
+        this._entryId = _entryId;
+    }
+    @DynamoDBAttribute(attributeName = "description")
+    public String getDescription() {
+        return _description;
+    }
+
+    public void setDescription(final String _description) {
+        this._description = _description;
     }
     @DynamoDBAttribute(attributeName = "energy")
     public Double getEnergy() {
@@ -53,14 +52,6 @@ public class DailyDataDO {
 
     public void setEnergy(final Double _energy) {
         this._energy = _energy;
-    }
-    @DynamoDBAttribute(attributeName = "steps")
-    public Double getSteps() {
-        return _steps;
-    }
-
-    public void setSteps(final Double _steps) {
-        this._steps = _steps;
     }
 
 }
