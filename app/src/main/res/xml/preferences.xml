@@ -7,29 +7,29 @@
         <ListPreference
             android:defaultValue="Calories"
             android:dialogTitle="Energy"
+            android:entries="@array/pref_values_energy_units"
+            android:entryValues="@array/pref_values_energy_units"
+            android:key="@string/pref_key_unit_energy"
             android:summary="%s"
-            android:entries="@array/pref_energy_units"
-            android:entryValues="@array/pref_energy_units"
-            android:key="@string/pref_unit_energy_key"
-            android:title="@string/pref_unit_energy_label" />
+            android:title="@string/pref_label_unit_energy" />
 
         <ListPreference
             android:defaultValue="Metric"
             android:dialogTitle="Distance"
+            android:entries="@array/pref_values_generic_units"
+            android:entryValues="@array/pref_values_generic_units"
+            android:key="@string/pref_key_unit_distance"
             android:summary="%s"
-            android:entries="@array/pref_generic_units"
-            android:entryValues="@array/pref_generic_units"
-            android:key="@string/pref_unit_distance_key"
-            android:title="@string/pref_unit_distance_label" />
+            android:title="@string/pref_label_unit_distance" />
 
         <ListPreference
             android:defaultValue="Metric"
             android:dialogTitle="Weight"
+            android:entries="@array/pref_values_generic_units"
+            android:entryValues="@array/pref_values_generic_units"
+            android:key="@string/pref_key_unit_weight"
             android:summary="%s"
-            android:entries="@array/pref_generic_units"
-            android:entryValues="@array/pref_generic_units"
-            android:key="@string/pref_unit_weight_key"
-            android:title="@string/pref_unit_weight_label" />
+            android:title="@string/pref_label_unit_weight" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -39,41 +39,39 @@
         <ListPreference
             android:defaultValue="Moderate"
             android:dialogTitle="Lifestyle"
+            android:entries="@array/pref_values_lifestyle"
+            android:entryValues="@array/pref_values_lifestyle"
+
+            android:key="@string/pref_key_personal_lifestyle"
             android:summary="%s"
-            android:entries="@array/pref_lifestyle"
-            android:entryValues="@array/pref_lifestyle"
-            android:key="@string/pref_personal_lifestyle_key"
-            android:title="@string/pref_personal_lifestyle_label" />
+            android:title="@string/pref_label_personal_lifestyle" />
 
         <ListPreference
             android:defaultValue="Male"
             android:dialogTitle="Gender"
+            android:entries="@array/pref_values_gender"
+            android:entryValues="@array/pref_values_gender"
+            android:key="@string/pref_key_personal_lifestyle"
             android:summary="%s"
-            android:entries="@array/pref_lifestyle"
-            android:entryValues="@array/pref_lifestyle"
-            android:key="@string/pref_personal_lifestyle_key"
-            android:title="@string/pref_personal_lifestyle_label" />
+            android:title="@string/pref_label_personal_gender" />
 
         <EditTextPreference
-            android:defaultValue="85"
             android:dialogTitle="Weight"
-            android:title="@string/pref_personal_weight_label"
-            android:key="@string/pref_personal_weight_key"
-            />
+            android:key="@string/pref_key_personal_weight"
+            android:title="@string/pref_label_personal_weight"
+            android:summary="%s"/>
 
         <EditTextPreference
-            android:defaultValue="85"
             android:dialogTitle="Height"
-            android:title="@string/pref_personal_height_label"
-            android:key="@string/pref_personal_height_key"
-            />
+            android:key="@string/pref_key_personal_height"
+            android:title="@string/pref_label_personal_height"
+            android:summary="%s"/>
 
         <EditTextPreference
-            android:defaultValue="85"
             android:dialogTitle="Energy Goal"
-            android:title="@string/pref_personal_energy_label"
-            android:key="@string/pref_personal_energy_key"
-            />
+            android:key="@string/pref_key_personal_energy"
+            android:title="@string/pref_label_personal_energy"
+            android:summary="%s"/>
 
     </PreferenceCategory>
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -85,7 +86,7 @@ public class NavigationActivity extends AppCompatActivity implements
     }
 
     private void testFirstLogin() {
-        sharedPreferences = getSharedPreferences("com.grp2.fitness", MODE_PRIVATE);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         if (sharedPreferences.getBoolean("firststart", true)) {
             sharedPreferences.edit().putBoolean("firststart", false).apply();
             startActivity(new Intent(NavigationActivity.this , SetupActivity.class));
@@ -228,15 +229,18 @@ public class NavigationActivity extends AppCompatActivity implements
         return googleFitApi;
     }
 
+    public SharedPreferences getSharedPreferences(){
+        return this.sharedPreferences;
+    }
     public DailyDataManager getDailyDataManager(){
         return this.dailyDataManager;
     }
-
     public CognitoSyncManager getSyncClient(){
         return this.syncClient;
     }
     public CognitoCachingCredentialsProvider getCredentialsProvider(){
         return this.credentialsProvider;
     }
+
 
 }

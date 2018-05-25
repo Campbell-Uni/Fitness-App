@@ -11,42 +11,42 @@
     <string name="pref_category_unit_label">Units</string>
     <string name="pref_category_personal_label">Personal</string>
 
-    <string name="pref_unit_energy_label">Energy</string>
-    <string name="pref_unit_distance_label">Distance</string>
-    <string name="pref_unit_weight_label">Weight</string>
-    <string name="pref_personal_lifestyle_label">Lifestyle</string>
-    <string name="pref_personal_gender_label">Gender</string>
-    <string name="pref_personal_weight_label">Weight</string>
-    <string name="pref_personal_height_label">Height</string>
-    <string name="pref_personal_energy_label">Energy Goal</string>
+    <string name="pref_label_unit_energy">Energy</string>
+    <string name="pref_label_unit_distance">Distance</string>
+    <string name="pref_label_unit_weight">Weight</string>
+    <string name="pref_label_personal_lifestyle">Lifestyle</string>
+    <string name="pref_label_personal_gender">Gender</string>
+    <string name="pref_label_personal_weight">Weight</string>
+    <string name="pref_label_personal_height">Height</string>
+    <string name="pref_label_personal_energy">Energy Goal</string>
 
-    <string name="pref_unit_energy_key">pref_unit_energy</string>
-    <string name="pref_unit_distance_key">pref_unit_distance</string>
-    <string name="pref_unit_weight_key">pref_unit_weight</string>
-    <string name="pref_personal_lifestyle_key">pref_unit_lifestyle</string>
-    <string name="pref_personal_gender_key">pref_unit_gender</string>
-    <string name="pref_personal_weight_key">pref_unit_weight</string>
-    <string name="pref_personal_height_key">pref_unit_height</string>
-    <string name="pref_personal_energy_key">pref_unit_energy</string>
+    <string name="pref_key_unit_energy">pref_unit_energy</string>
+    <string name="pref_key_unit_distance">pref_unit_distance</string>
+    <string name="pref_key_unit_weight">pref_unit_weight</string>
+    <string name="pref_key_personal_lifestyle">pref_personal_lifestyle</string>
+    <string name="pref_key_personal_gender">pref_personal_gender</string>
+    <string name="pref_key_personal_weight">pref_personal_weight</string>
+    <string name="pref_key_personal_height">pref_personal_height</string>
+    <string name="pref_key_personal_energy">pref_personal_energy</string>
 
 
-    <string-array name="pref_generic_units">
+    <string-array name="pref_values_generic_units">
         <item>Metric</item>
         <item>Imperial</item>
     </string-array>
 
-    <string-array name="pref_energy_units">
+    <string-array name="pref_values_energy_units">
         <item>Kilojoules</item>
         <item>Calories</item>
     </string-array>
 
-    <string-array name="pref_lifestyle">
+    <string-array name="pref_values_lifestyle">
         <item>Sedentary</item>
         <item>Moderate</item>
         <item>Active</item>
     </string-array>
 
-    <string-array name="pref_gender">
+    <string-array name="pref_values_gender">
         <item>Male</item>
         <item>Female</item>
     </string-array>
