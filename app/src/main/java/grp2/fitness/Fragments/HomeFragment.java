@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.amazonaws.models.nosql.DailyDataDO;
@@ -30,7 +32,6 @@ public class HomeFragment extends Fragment implements
 
     private Double goalEnergy;
 
-    private TextView goalEnergyTV;
     private TextView currentEnergyTV;
     private TextView remainingEnergyTV;
     private TextView stepsTV;
@@ -54,10 +55,11 @@ public class HomeFragment extends Fragment implements
         CardView pedometerCard = view.findViewById(R.id.pedometercard);
         CardView leaderboardCard = view.findViewById(R.id.leaderboardcard);
 
-        goalEnergyTV = view.findViewById(R.id.goalcal);
-        currentEnergyTV = view.findViewById(R.id.currentcal);
-        remainingEnergyTV = view.findViewById(R.id.remainingcal);
-        stepsTV = view.findViewById(R.id.pedometer_text);
+        TextView goalEnergyTV = view.findViewById(R.id.goalcal);
+        ListView leaderboardList = view.findViewById(R.id.leaderboard);
+        currentEnergyTV     = view.findViewById(R.id.currentcal);
+        remainingEnergyTV   = view.findViewById(R.id.remainingcal);
+        stepsTV             = view.findViewById(R.id.pedometer_text);
 
         diaryCard.setOnClickListener(this);
         pedometerCard.setOnClickListener(this);
@@ -80,6 +82,7 @@ public class HomeFragment extends Fragment implements
                 leaderboard
         );
 
+        leaderboardList.setAdapter(leaderboardAdapter);
         dailyDataManager.syncAllDailyData(StringUtils.getCurrentDateFormatted());
 
         return view;

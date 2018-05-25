@@ -59,19 +59,19 @@
             android:dialogTitle="Weight"
             android:key="@string/pref_key_personal_weight"
             android:title="@string/pref_label_personal_weight"
-            android:summary="%s"/>
+            android:defaultValue="85"/>
 
         <EditTextPreference
             android:dialogTitle="Height"
             android:key="@string/pref_key_personal_height"
             android:title="@string/pref_label_personal_height"
-            android:summary="%s"/>
+            android:defaultValue="185"/>
 
         <EditTextPreference
             android:dialogTitle="Energy Goal"
             android:key="@string/pref_key_personal_energy"
             android:title="@string/pref_label_personal_energy"
-            android:summary="%s"/>
+            android:defaultValue="2000"/>
 
     </PreferenceCategory>
 
