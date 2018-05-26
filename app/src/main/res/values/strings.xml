@@ -7,9 +7,11 @@
     <!--Preferences-->
     <string name="pref_category_unit_key">pref_category_units</string>
     <string name="pref_category_personal_key">pref_category_personal</string>
+    <string name="pref_category_goal_key">pref_category_goal</string>
 
     <string name="pref_category_unit_label">Units</string>
     <string name="pref_category_personal_label">Personal</string>
+    <string name="pref_category_goal_label">Goals</string>
 
     <string name="pref_label_unit_energy">Energy</string>
     <string name="pref_label_unit_distance">Distance</string>
@@ -18,7 +20,10 @@
     <string name="pref_label_personal_gender">Gender</string>
     <string name="pref_label_personal_weight">Weight</string>
     <string name="pref_label_personal_height">Height</string>
-    <string name="pref_label_personal_energy">Energy Goal</string>
+    <string name="pref_label_personal_name">Nickname</string>
+    <string name="pref_label_personal_age">Age</string>
+    <string name="pref_label_goal_energy">Energy Goal</string>
+    <string name="pref_label_goal_steps">Step Goal</string>
 
     <string name="pref_key_unit_energy">pref_unit_energy</string>
     <string name="pref_key_unit_distance">pref_unit_distance</string>
@@ -27,9 +32,12 @@
     <string name="pref_key_personal_gender">pref_personal_gender</string>
     <string name="pref_key_personal_weight">pref_personal_weight</string>
     <string name="pref_key_personal_height">pref_personal_height</string>
-    <string name="pref_key_personal_energy">pref_personal_energy</string>
+    <string name="pref_key_personal_name">pref_personal_name</string>
+    <string name="pref_key_personal_age">pref_personal_age</string>
+    <string name="pref_key_goal_energy">pref_goal_energy</string>
+    <string name="pref_key_goal_steps">pref_goal_steps</string>
 
-
+    <!--A hole that we have dug too deep into but all string values must remain in Pascal Case of enums-->
     <string-array name="pref_values_generic_units">
         <item>Metric</item>
         <item>Imperial</item>

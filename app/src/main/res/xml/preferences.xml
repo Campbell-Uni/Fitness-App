@@ -36,6 +36,11 @@
         android:key="@string/pref_category_personal_key"
         android:title="@string/pref_category_personal_label">
 
+        <EditTextPreference
+            android:dialogTitle="Nickname"
+            android:key="@string/pref_key_personal_name"
+            android:title="@string/pref_label_personal_name" />
+
         <ListPreference
             android:defaultValue="Moderate"
             android:dialogTitle="Lifestyle"
@@ -51,27 +56,39 @@
             android:dialogTitle="Gender"
             android:entries="@array/pref_values_gender"
             android:entryValues="@array/pref_values_gender"
-            android:key="@string/pref_key_personal_lifestyle"
+            android:key="@string/pref_key_personal_gender"
             android:summary="%s"
             android:title="@string/pref_label_personal_gender" />
 
         <EditTextPreference
-            android:dialogTitle="Weight"
-            android:key="@string/pref_key_personal_weight"
-            android:title="@string/pref_label_personal_weight"
-            android:defaultValue="85"/>
-
-        <EditTextPreference
+            android:defaultValue="185"
             android:dialogTitle="Height"
             android:key="@string/pref_key_personal_height"
-            android:title="@string/pref_label_personal_height"
-            android:defaultValue="185"/>
+            android:title="@string/pref_label_personal_height" />
 
         <EditTextPreference
+            android:defaultValue="85"
+            android:dialogTitle="Weight"
+            android:key="@string/pref_key_personal_weight"
+            android:title="@string/pref_label_personal_weight" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="@string/pref_category_goal_key"
+        android:title="@string/pref_category_goal_label">
+
+        <EditTextPreference
+            android:defaultValue="2000"
             android:dialogTitle="Energy Goal"
-            android:key="@string/pref_key_personal_energy"
-            android:title="@string/pref_label_personal_energy"
-            android:defaultValue="2000"/>
+            android:key="@string/pref_key_goal_energy"
+            android:title="@string/pref_label_goal_energy" />
+
+        <EditTextPreference
+            android:defaultValue="2000"
+            android:dialogTitle="Step Goal"
+            android:key="@string/pref_key_goal_steps"
+            android:title="@string/pref_label_goal_steps" />
 
     </PreferenceCategory>
 
