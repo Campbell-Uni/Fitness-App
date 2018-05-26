@@ -138,24 +138,21 @@ public class HomeFragment extends Fragment implements
 
     @Override
     public void onAllDailyDataSynced(final ArrayList<DailyDataDO> allDailyData) {
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                dailyDataSynced = true;
-                if(diarySynced){
-                    activity.hideLoadingIcon();
-                }
+        activity.runOnUiThread(() -> {
+            dailyDataSynced = true;
+            if(diarySynced){
+                activity.hideLoadingIcon();
+            }
 
-                leaderboard.clear();
-                leaderboard.addAll(allDailyData);
-                leaderboard.sort(Comparator.comparing(DailyDataDO::getSteps).reversed());
-                leaderboardAdapter.notifyDataSetChanged();
+            leaderboard.clear();
+            leaderboard.addAll(allDailyData);
+            leaderboard.sort(Comparator.comparing(DailyDataDO::getSteps).reversed());
+            leaderboardAdapter.notifyDataSetChanged();
 
-                for(DailyDataDO dailyDataDO : allDailyData){
-                    if(dailyDataDO.getUserId().equals(activity.getCredentialsProvider().getIdentityId())){
-                        String stepString = "Steps: " + dailyDataDO.getSteps().toString();
-                        stepsTV.setText(stepString);
-                    }
+            for(DailyDataDO dailyDataDO : allDailyData){
+                if(dailyDataDO.getUserId().equals(activity.getCredentialsProvider().getIdentityId())){
+                    String stepString = "Steps: " + dailyDataDO.getSteps().toString();
+                    stepsTV.setText(stepString);
                 }
             }
         });

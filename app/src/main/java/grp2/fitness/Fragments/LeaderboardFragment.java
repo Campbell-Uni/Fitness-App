@@ -126,14 +126,11 @@ public class LeaderboardFragment extends Fragment implements DailyDataManager.Da
 
     @Override
     public void onAllDailyDataSynced(final ArrayList<DailyDataDO> allDailyData) {
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                activity.hideLoadingIcon();
-                leaderboard.clear();
-                leaderboard.addAll(allDailyData);
-                sortLeaderboard();
-            }
+        activity.runOnUiThread(() -> {
+            activity.hideLoadingIcon();
+            leaderboard.clear();
+            leaderboard.addAll(allDailyData);
+            sortLeaderboard();
         });
     }
 

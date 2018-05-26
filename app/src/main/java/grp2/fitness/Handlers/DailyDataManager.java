@@ -57,16 +57,13 @@ public class DailyDataManager {
     }
 
     private void syncDailyData(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                dailyData = dynamoDBMapper.load(
-                        DailyDataDO.class,
-                        todayDate,
-                        userId);
+        new Thread(() -> {
+            dailyData = dynamoDBMapper.load(
+                    DailyDataDO.class,
+                    todayDate,
+                    userId);
 
-                saveDailyData();
-            }
+            saveDailyData();
         }).start();
     }
 
@@ -117,24 +114,18 @@ public class DailyDataManager {
     }
 
     private void saveDailyData(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                if(dynamoDBMapper != null){
-                    dynamoDBMapper.save(dailyData);
-                    callback.onDailyDataSaved(dailyData);
-                }
+        new Thread(() -> {
+            if(dynamoDBMapper != null){
+                dynamoDBMapper.save(dailyData);
+                callback.onDailyDataSaved(dailyData);
             }
         }).start();
     }
 
     public void syncAllDailyData(final String date) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                allDailyData = new ArrayList<>(dynamoDBMapper.query(DailyDataDO.class, getAllDailyDataQuery(date)));
-                callback.onAllDailyDataSynced(allDailyData);
-            }
+        new Thread(() -> {
+            allDailyData = new ArrayList<>(dynamoDBMapper.query(DailyDataDO.class, getAllDailyDataQuery(date)));
+            callback.onAllDailyDataSynced(allDailyData);
         }).start();
     }
 

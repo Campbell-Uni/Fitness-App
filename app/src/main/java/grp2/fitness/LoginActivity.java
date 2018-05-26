@@ -20,19 +20,16 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
-            @Override
-            public void onComplete(AWSStartupResult awsStartupResult) {
-                AuthUIConfiguration config =
-                        new AuthUIConfiguration.Builder()
-                                .userPools(true)
-                                .signInButton(GoogleButton.class)
-                                .logoResId(R.drawable.logow)
-                                .canCancel(true)
-                                .build();
-                SignInUI signin = (SignInUI) AWSMobileClient.getInstance().getClient(LoginActivity.this, SignInUI.class);
-                signin.login(LoginActivity.this, NavigationActivity.class).authUIConfiguration(config).execute();
-            }
+        AWSMobileClient.getInstance().initialize(this, awsStartupResult -> {
+            AuthUIConfiguration config =
+                    new AuthUIConfiguration.Builder()
+                            .userPools(true)
+                            .signInButton(GoogleButton.class)
+                            .logoResId(R.drawable.logow)
+                            .canCancel(true)
+                            .build();
+            SignInUI signin = (SignInUI) AWSMobileClient.getInstance().getClient(LoginActivity.this, SignInUI.class);
+            signin.login(LoginActivity.this, NavigationActivity.class).authUIConfiguration(config).execute();
         }).execute();
     }
 

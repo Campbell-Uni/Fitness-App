@@ -52,24 +52,18 @@ public class DiaryManager {
         diaryEntry.setEnergy(energy);
         diaryEntry.setDescription(description);
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                dynamoDBMapper.save(diaryEntry);
-                syncDiary();
-            }
+        new Thread(() -> {
+            dynamoDBMapper.save(diaryEntry);
+            syncDiary();
         }).start();
     }
 
     public void syncDiary(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                diary.clear();
-                diary.addAll(dynamoDBMapper.query(DiaryDO.class, getDiaryQuery()));
-                callback.onDiarySynced(diary);
+        new Thread(() -> {
+            diary.clear();
+            diary.addAll(dynamoDBMapper.query(DiaryDO.class, getDiaryQuery()));
+            callback.onDiarySynced(diary);
 
-            }
         }).start();
     }
 

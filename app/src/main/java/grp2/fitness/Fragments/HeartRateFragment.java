@@ -80,11 +80,9 @@ public class HeartRateFragment extends Fragment implements
     public void onDataPoint(DataPoint dataPoint) {
         for( final Field field : dataPoint.getDataType().getFields() ) {
             final Value value = dataPoint.getValue( field );
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    heartRate.setText(value.toString());
-                }
+            runOnUiThread(() -> {
+                heartRate.setText(value.toString());
+                activity.hideLoadingIcon();
             });
         }
     }

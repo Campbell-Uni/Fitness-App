@@ -90,11 +90,10 @@ public class PedometerFragment extends Fragment implements
     public void onDataPoint(DataPoint dataPoint) {
         for( final Field field : dataPoint.getDataType().getFields() ) {
             final Value value = dataPoint.getValue( field );
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
+            runOnUiThread(() ->{
+
                     steps.setText(value.toString());
-                }
+
             });
         }
     }
@@ -108,10 +107,8 @@ public class PedometerFragment extends Fragment implements
     //Unused callbacks
     @Override
     public void onConnectionSuspended() {}
-
     @Override
     public void onConnectionFailed() {}
-
     @Override
     public void onConnected() {}
 
