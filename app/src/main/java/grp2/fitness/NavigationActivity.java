@@ -31,6 +31,7 @@ import grp2.fitness.Fragments.HomeFragment;
 import grp2.fitness.Fragments.LeaderboardFragment;
 import grp2.fitness.Fragments.PedometerFragment;
 import grp2.fitness.Fragments.SettingsFragment;
+import grp2.fitness.Fragments.SetupFragment;
 import grp2.fitness.Handlers.CognitoDatasetManager;
 import grp2.fitness.Handlers.DailyDataManager;
 import grp2.fitness.Handlers.GoogleFitApi;
@@ -71,6 +72,8 @@ public class NavigationActivity extends AppCompatActivity implements
 
         initialiseCognito();
         testFirstLogin();
+
+
     }
 
     @Override
@@ -89,7 +92,7 @@ public class NavigationActivity extends AppCompatActivity implements
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         if (sharedPreferences.getBoolean("firststart", true)) {
             sharedPreferences.edit().putBoolean("firststart", false).apply();
-            startActivity(new Intent(NavigationActivity.this , SetupActivity.class));
+            updateView(SetupFragment.class);
         }
     }
 

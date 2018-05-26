@@ -150,7 +150,7 @@ public class HomeFragment extends Fragment implements
 
     private double getGoalEnergy() {
         SharedPreferences sharedPreferences = activity.getSharedPreferences();
-        String energyGoalKey = activity.getString(R.string.pref_key_personal_energy);
+        String energyGoalKey = activity.getString(R.string.pref_key_goal_energy);
         return Double.parseDouble(sharedPreferences.getString(energyGoalKey, "0"));
     }
 
