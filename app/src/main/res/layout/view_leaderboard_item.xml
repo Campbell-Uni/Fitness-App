@@ -22,7 +22,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Steps"
-        grid:layout_gravity="fill" /
+        grid:layout_gravity="fill" />
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
