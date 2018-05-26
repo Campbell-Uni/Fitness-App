@@ -7,17 +7,40 @@
     tools:context="grp2.fitness.Fragments.HomeFragment">
 
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Energy (kJ)"
-        />
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/energy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Energy (kJ)" />
+
+            <EditText
+                android:id="@+id/energy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+
+        </LinearLayout>
+
+        <Spinner
+            android:id="@+id/type_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            android:spinnerMode="dropdown"
+            android:textAlignment="center" />
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
@@ -29,19 +52,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <Spinner
-        android:id="@+id/type_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:spinnerMode="dropdown"
-        android:textAlignment="center" />
-
     <Button
         android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Submit" />
+        android:text="Submit"
+        android:layout_margin="20dp"/>
 
     <ListView
         android:id="@+id/list"

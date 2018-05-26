@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -76,8 +77,9 @@ public class HomeFragment extends Fragment implements
         leaderboard = new ArrayList<>();
 
         leaderboardList.setHasFixedSize(true);
-        leaderboardList.addItemDecoration(new DividerItemDecoration(getContext(),
-                DividerItemDecoration.VERTICAL));
+        DividerItemDecoration spacer = new DividerItemDecoration(activity, DividerItemDecoration.VERTICAL);
+        spacer.setDrawable(ContextCompat.getDrawable(activity, R.drawable.item_divider));
+        leaderboardList.addItemDecoration(spacer);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(activity);
         leaderboardList.setLayoutManager(layoutManager);
@@ -152,8 +154,7 @@ public class HomeFragment extends Fragment implements
 
             for(DailyDataDO dailyDataDO : allDailyData){
                 if(dailyDataDO.getUserId().equals(activity.getCredentialsProvider().getIdentityId())){
-                    String stepString = "Steps: " + dailyDataDO.getSteps().toString();
-                    stepsTV.setText(stepString);
+                    stepsTV.setText(dailyDataDO.getSteps().toString());
                 }
             }
         });

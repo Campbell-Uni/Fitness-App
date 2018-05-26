@@ -2,6 +2,7 @@ package grp2.fitness.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -69,8 +70,9 @@ public class LeaderboardFragment extends Fragment implements DailyDataManager.Da
         leaderboard = new ArrayList<>();
 
         leaderboardRV.setHasFixedSize(true);
-        leaderboardRV.addItemDecoration(new DividerItemDecoration(getContext(),
-                DividerItemDecoration.VERTICAL));
+        DividerItemDecoration spacer = new DividerItemDecoration(activity, DividerItemDecoration.VERTICAL);
+        spacer.setDrawable(ContextCompat.getDrawable(activity, R.drawable.item_divider));
+        leaderboardRV.addItemDecoration(spacer);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(activity);
         leaderboardRV.setLayoutManager(layoutManager);
