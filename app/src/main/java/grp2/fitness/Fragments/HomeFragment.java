@@ -11,9 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.amazonaws.models.nosql.DailyDataDO;
@@ -61,7 +58,7 @@ public class HomeFragment extends Fragment implements
         CardView leaderboardCard = view.findViewById(R.id.leaderboardcard);
 
         TextView goalEnergyTV = view.findViewById(R.id.goalcal);
-        RecyclerView leaderboardList = view.findViewById(R.id.leaderboard);
+        RecyclerView leaderboardList = view.findViewById(R.id.menu_leaderboard);
         currentEnergyTV     = view.findViewById(R.id.currentcal);
         remainingEnergyTV   = view.findViewById(R.id.remainingcal);
         stepsTV             = view.findViewById(R.id.pedometer_text);
@@ -104,13 +101,18 @@ public class HomeFragment extends Fragment implements
     @Override
     public void onClick(View view) {
 
-        if(getActivity() == null){
-            return;
-        }
-
         switch(view.getId()){
             case R.id.diarycard :
-                ((NavigationActivity)getActivity()).updateView(DiaryFragment.class);
+                activity.onNavigationItemSelected(activity.getNavigationView().getMenu().findItem(R.id.diary));
+                getActivity().setTitle("Diary");
+                break;
+            case R.id.pedometercard :
+                activity.onNavigationItemSelected(activity.getNavigationView().getMenu().findItem(R.id.pedometer));
+                getActivity().setTitle("Pedometer");
+                break;
+            case R.id.leaderboardcard :
+                activity.onNavigationItemSelected(activity.getNavigationView().getMenu().findItem(R.id.menu_leaderboard));
+                getActivity().setTitle("Leaderboard");
                 break;
         }
 
@@ -118,21 +120,20 @@ public class HomeFragment extends Fragment implements
 
     @Override
     public void onDiarySynced(final ArrayList<DiaryDO> diary) {
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Double consumedEnergy = 0.0;
-                Double remainingEnergy = 0.0;
+        activity.runOnUiThread(() -> {
+            Double consumedEnergy = 0.0;
+            Double remainingEnergy;
+
+
 
                 for(DiaryDO diaryEntry : diary){
                     consumedEnergy += diaryEntry.getEnergy();
                 }
 
-                remainingEnergy = goalEnergy - consumedEnergy;
+            remainingEnergy = goalEnergy - consumedEnergy;
 
-                currentEnergyTV.setText(consumedEnergy.toString());
-                remainingEnergyTV.setText(remainingEnergy.toString());
-            }
+            currentEnergyTV.setText(consumedEnergy.toString());
+            remainingEnergyTV.setText(remainingEnergy.toString());
         });
     }
 
