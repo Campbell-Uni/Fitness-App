@@ -41,6 +41,9 @@ public class DailyDataDO {
 
     @DynamoDBAttribute(attributeName = "average_heart_rate")
     public Double getAverageHeartRate() {
+        if (_averageHeartRate == null){
+            return 0.0;
+        }
         return _averageHeartRate;
     }
     public void setAverageHeartRate(final Double _averageHeartRate) {
@@ -49,6 +52,9 @@ public class DailyDataDO {
 
     @DynamoDBAttribute(attributeName = "energy")
     public Double getEnergy() {
+        if(_energy == null){
+            return 0.0;
+        }
         return _energy;
     }
     public void setEnergy(final Double _energy) {
@@ -57,6 +63,9 @@ public class DailyDataDO {
 
     @DynamoDBAttribute(attributeName = "steps")
     public Double getSteps() {
+        if(_steps == null){
+            return  0.0;
+        }
         return _steps;
     }
     public void setSteps(final Double _steps) {

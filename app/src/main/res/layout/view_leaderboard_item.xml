@@ -6,7 +6,8 @@
     android:layout_centerHorizontal="true"
     grid:alignmentMode="alignBounds"
     android:background="@drawable/grid_border"
-    grid:columnCount="3">
+    grid:columnCount="3"
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/title"
@@ -21,8 +22,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Steps"
-        grid:layout_gravity="fill" />
-
+        grid:layout_gravity="fill" /
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"

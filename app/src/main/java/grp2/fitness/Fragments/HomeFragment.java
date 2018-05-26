@@ -20,7 +20,7 @@ import com.amazonaws.models.nosql.DailyDataDO;
 import com.amazonaws.models.nosql.DiaryDO;
 
 import java.util.ArrayList;
-import java.util.Objects;
+import java.util.Comparator;
 
 import grp2.fitness.Handlers.DailyDataManager;
 import grp2.fitness.Handlers.DiaryManager;
@@ -148,6 +148,7 @@ public class HomeFragment extends Fragment implements
 
                 leaderboard.clear();
                 leaderboard.addAll(allDailyData);
+                leaderboard.sort(Comparator.comparing(DailyDataDO::getSteps).reversed());
                 leaderboardAdapter.notifyDataSetChanged();
 
                 for(DailyDataDO dailyDataDO : allDailyData){
