@@ -156,8 +156,6 @@ public class NavigationActivity extends AppCompatActivity implements
 
         if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             this.drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
     }
 
@@ -181,7 +179,7 @@ public class NavigationActivity extends AppCompatActivity implements
             case R.id.calculator:
                 fragmentClass = CalculatorFragment.class;
                 break;
-            case R.id.leaderboard:
+            case R.id.menu_leaderboard:
                 fragmentClass = LeaderboardFragment.class;
                 break;
             case R.id.settings:
@@ -240,6 +238,9 @@ public class NavigationActivity extends AppCompatActivity implements
 
     public SharedPreferences getSharedPreferences(){
         return this.sharedPreferences;
+    }
+    public NavigationView getNavigationView(){
+        return this.navigationView;
     }
     public DailyDataManager getDailyDataManager(){
         return this.dailyDataManager;
