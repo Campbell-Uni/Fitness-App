@@ -33,6 +33,7 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.android.support:preference-v7:26.1.0'
     implementation 'com.google.android.gms:play-services-fitness:15.0.1'
+    implementation "com.android.support:gridlayout-v7:26.1.0"
 
     // Mobile Client for initializing the SDK
     implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
