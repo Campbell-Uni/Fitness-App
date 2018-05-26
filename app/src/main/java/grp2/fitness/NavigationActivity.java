@@ -15,6 +15,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobile.auth.core.IdentityManager;
@@ -43,6 +44,7 @@ public class NavigationActivity extends AppCompatActivity implements
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
+    private NavigationView navigationView;
 
     private GoogleFitApi googleFitApi;
 
@@ -59,7 +61,7 @@ public class NavigationActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_navigation);
 
         Toolbar toolbar = findViewById(R.id.navigation_toolbar);
-        NavigationView navigationView = findViewById(R.id.navigation_view);
+        navigationView = findViewById(R.id.navigation_view);
 
         drawerLayout = findViewById(R.id.drawer_layout);
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
@@ -72,8 +74,6 @@ public class NavigationActivity extends AppCompatActivity implements
 
         initialiseCognito();
         testFirstLogin();
-
-
     }
 
     @Override
@@ -86,6 +86,9 @@ public class NavigationActivity extends AppCompatActivity implements
     protected void onResume() {
         super.onResume();
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+        String userName = sharedPreferences.getString(getString(R.string.pref_key_personal_name), "Profile Name");
+        TextView userNameTV = navigationView.getHeaderView(0).findViewById(R.id.profile_name);
+        userNameTV.setText(userName);
     }
 
     private void testFirstLogin() {
