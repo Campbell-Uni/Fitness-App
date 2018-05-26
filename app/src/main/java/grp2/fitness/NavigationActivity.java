@@ -86,7 +86,7 @@ public class NavigationActivity extends AppCompatActivity implements
     protected void onResume() {
         super.onResume();
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
-        String userName = sharedPreferences.getString(getString(R.string.pref_key_personal_name), "Profile Name");
+        String userName = sharedPreferences.getString(getString(R.string.pref_key_personal_name), "No Profile Name!");
         TextView userNameTV = navigationView.getHeaderView(0).findViewById(R.id.profile_name);
         userNameTV.setText(userName);
     }

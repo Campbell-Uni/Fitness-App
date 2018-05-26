@@ -1,11 +1,13 @@
 package grp2.fitness.Fragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.fitness.data.DataPoint;
@@ -27,7 +29,14 @@ public class PedometerFragment extends Fragment implements
 
     private static final String AUTH_STATE_PENDING = "auth_state_pending";
     private GoogleFitApi googleFitApi;
+
+    private NavigationActivity activity;
+
     private TextView steps;
+    private ProgressBar stepPB;
+
+    private int goalSteps;
+    private int currentSteps;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -38,13 +47,17 @@ public class PedometerFragment extends Fragment implements
         }
 
         View view = inflater.inflate(R.layout.fragment_pedometer, container, false);
-        steps = view.findViewById(R.id.steps);
+
+        steps = view.findViewById(R.id.step_text);
+        stepPB = view.findViewById(R.id.step_progress);
 
         googleFitApi = ((NavigationActivity) getActivity()).getGoogleFitApi(this);
 
         if (savedInstanceState != null) {
             googleFitApi.setAuthState(savedInstanceState.getBoolean(AUTH_STATE_PENDING));
         }
+        goalSteps = getGoalSteps();
+        stepPB.setMax(goalSteps);
 
         return view;
     }
@@ -84,6 +97,12 @@ public class PedometerFragment extends Fragment implements
                 }
             });
         }
+    }
+
+    private int getGoalSteps() {
+        SharedPreferences sharedPreferences = activity.getSharedPreferences();
+        String energyGoalKey = activity.getString(R.string.pref_key_goal_steps);
+        return (int) Double.parseDouble(sharedPreferences.getString(energyGoalKey, "0"));
     }
 
     //Unused callbacks

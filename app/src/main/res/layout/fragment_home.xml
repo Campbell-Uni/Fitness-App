@@ -52,7 +52,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_below="@id/goaltxt"
                         android:layout_marginStart="10dp"
-                        android:text="XXXX KCal"
+                        android:text="0"
                         android:textColor="#505050"
                         android:textSize="20sp" />
 
@@ -88,7 +88,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignStart="@+id/currentxt"
                         android:layout_below="@id/currentxt"
-                        android:text="XXXX KCal"
+                        android:text="0"
                         android:textColor="#505050"
                         android:textSize="20sp" />
 
@@ -124,7 +124,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignStart="@+id/remainingtxt"
                         android:layout_below="@id/remainingtxt"
-                        android:text="XXXX KCal"
+                        android:text="0"
                         android:textColor="#505050"
                         android:textSize="20sp" />
 
