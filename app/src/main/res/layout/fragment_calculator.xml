@@ -3,13 +3,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="grp2.fitness.Fragments.CalculatorFragment">
+    tools:context="grp2.fitness.fragments.CalculatorFragment">
+
+    <Spinner
+        android:id="@+id/activityLevelSp"
+        android:layout_width="118dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/energyCal"
+        android:layout_alignTop="@+id/activityText"
+        android:spinnerMode="dropdown"
+        android:textAlignment="center" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Calculator Fragment" />
+        android:id="@+id/activityText"
+        android:layout_width="wrap_content"
+        android:layout_height="26dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/energyKJ"
+        android:layout_marginBottom="56dp"
+        android:text="How active is your lifestyle?"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/tdeeAge"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tdeeHeight"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="Enter Age (yrs)"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/tdeeHeight"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tdeeWeight"
+        android:layout_centerHorizontal="true"
+        android:hint="Enter Height (cm)"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/tdeeWeight"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/genderBtns"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-229dp"
+        android:ems="10"
+        android:hint="Enter Weight (kg)"
+        android:inputType="numberDecimal" />
+
+    <RadioGroup
+        android:id="@+id/genderBtns"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="229dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/maleSelect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="male" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/calculatortabs"
@@ -26,4 +86,102 @@
         android:layout_height="match_parent"
         android:background="@android:color/white" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/tdeeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="TDEE Calculator"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/energyCal"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/equalText"
+        android:layout_marginEnd="12dp"
+        android:ems="10"
+        android:hint="Enter Energy (cal)"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:id="@+id/equalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/energyKJ"
+        android:layout_centerHorizontal="true"
+        android:text="="
+        android:textSize="30sp" />
+
+    <EditText
+        android:id="@+id/energyKJ"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="200dp"
+        android:ems="10"
+        android:hint="Enter Energy (kj)"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:id="@+id/calcText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="156dp"
+        android:text="Energy Calculator"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/bmiText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:text="BMI Calculator"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/bmiWeight"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/activityText"
+        android:layout_below="@+id/bmiText"
+        android:ems="10"
+        android:hint="Enter Weight (kg)"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/bmiHeight"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/activityText"
+        android:layout_below="@+id/bmiWeight"
+        android:hint="Enter Height (cm)"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:id="@+id/bmiValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="78dp"
+        android:layout_toEndOf="@+id/tdeeAge"
+        android:text="="
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/tdeeResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp"
+        android:text="0 TDEE" />
+
+</RelativeLayout>

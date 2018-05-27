@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/home"
             android:icon="@drawable/ic_home"
-            android:title="Home"/>
+            android:title="Home" />
         <item
             android:id="@+id/diary"
             android:icon="@drawable/ic_diary"
@@ -20,7 +21,8 @@
         <item
             android:id="@+id/calculator"
             android:icon="@drawable/ic_calculator"
-            android:title="Calculators" />
+            android:title="Calculators"
+            android:visible="true" />
         <item
             android:id="@+id/menu_leaderboard"
             android:icon="@drawable/ic_leaderboard"

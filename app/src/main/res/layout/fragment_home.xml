@@ -44,16 +44,17 @@
                     android:weightSum="5">
 
                     <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="50dp"
+                        android:layout_height="69dp"
                         android:layout_weight="1">
 
                         <TextView
                             android:id="@+id/goaltxt"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="24dp"
                             android:layout_alignParentTop="true"
-                            android:layout_alignStart="@+id/goalcal"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="0dp"
                             android:text="Goal"
                             android:textColor="#000000"
                             android:textSize="13sp" />
@@ -62,9 +63,7 @@
                             android:id="@+id/goalcal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:layout_below="@id/goaltxt"
-                            android:layout_marginStart="10dp"
+                            android:layout_centerInParent="true"
                             android:text="0"
                             android:textColor="#505050"
                             android:textSize="20sp" />
@@ -82,8 +81,8 @@
                         android:textSize="30sp" />
 
                     <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="50dp"
+                        android:layout_height="69dp"
                         android:layout_weight="1">
 
                         <TextView
@@ -91,6 +90,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
                             android:text="Current"
                             android:textColor="#000000"
                             android:textSize="13sp" />
@@ -99,8 +99,7 @@
                             android:id="@+id/currentcal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignStart="@+id/currentxt"
-                            android:layout_below="@id/currentxt"
+                            android:layout_centerInParent="true"
                             android:text="0"
                             android:textColor="#505050"
                             android:textSize="20sp" />
@@ -118,14 +117,15 @@
                         android:textSize="30sp" />
 
                     <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="70dp"
+                        android:layout_height="69dp"
                         android:layout_weight="1">
 
                         <TextView
                             android:id="@+id/remainingtxt"
-                            android:layout_width="wrap_content"
+                            android:layout_width="85dp"
                             android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
                             android:layout_alignParentTop="true"
                             android:text="Remaining"
                             android:textColor="#000000"
@@ -135,8 +135,7 @@
                             android:id="@+id/remainingcal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignStart="@+id/remainingtxt"
-                            android:layout_below="@id/remainingtxt"
+                            android:layout_centerInParent="true"
                             android:text="0"
                             android:textColor="#505050"
                             android:textSize="20sp" />
@@ -212,13 +211,12 @@
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
             app:cardCornerRadius="5dp"
             app:cardElevation="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
