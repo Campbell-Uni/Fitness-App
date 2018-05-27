@@ -42,6 +42,7 @@ public class HeartRateFragment extends Fragment implements
 
         View view = inflater.inflate(R.layout.fragment_heartrate, container, false);
         heartRate = view.findViewById(R.id.heartRate);
+        activity.hideLoadingIcon();
 
         googleFitApi = ((NavigationActivity) getActivity()).getGoogleFitApi(this);
 
